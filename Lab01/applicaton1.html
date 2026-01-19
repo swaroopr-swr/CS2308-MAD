@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Bag App</title>
+    <style>
+        /* --- CSS STYLING --- */
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background-color: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .app-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            text-align: center;
+            width: 320px;
+        }
+
+        .basket-header {
+            font-size: 1.2rem;
+            color: #555;
+            margin-bottom: 10px;
+        }
+
+        .count-display {
+            font-size: 3rem;
+            font-weight: 800;
+            color: #222;
+            margin-bottom: 20px;
+            transition: transform 0.1s ease;
+        }
+
+        .button-stack {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        /* Base Button Style */
+        .btn {
+            padding: 14px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn:active {
+            transform: scale(0.96);
+        }
+
+        /* Button Colors */
+        .btn-add {
+            background-color: #28a745; /* Green */
+            color: white;
+        }
+
+        .btn-minus {
+            background-color: #6c757d; /* Grey */
+            color: white;
+        }
+
+        .btn-wishlist {
+            background-color: #ff477e; /* Pink */
+            color: white;
+        }
+
+        .btn-sale {
+            background-color: #d90429; /* Red */
+            color: white;
+        }
+
+        /* Hover Effects */
+        .btn-add:hover { background-color: #218838; }
+        .btn-minus:hover { background-color: #5a6268; }
+        .btn-wishlist:hover { background-color: #e63e70; }
+        .btn-sale:hover { background-color: #b90422; }
+
+    </style>
+</head>
+<body>
+
+    <div class="app-card">
+        <div class="basket-header">Items in Bag</div>
+        <div id="count" class="count-display">0</div>
+
+        <div class="button-stack">
+            <button class="btn btn-add" onclick="updateBag(1)">
+                Add to Bag (+)
+            </button>
+
+            <button class="btn btn-minus" onclick="updateBag(-1)">
+                Remove Item (-)
+            </button>
+
+            <button class="btn btn-wishlist" onclick="alert('Added to Wishlist!')">
+                Move to Wishlist
+            </button>
+
+            <button class="btn btn-sale" onclick="updateBag(3)">
+                Add Sale Items (+3)
+            </button>
+        </div>
+    </div>
+
+    <script>
+        let currentCount = 0;
+        const countElement = document.getElementById('count');
+
+        function updateBag(amount) {
+            // Update the logic
+            currentCount += amount;
+
+            // Prevent negative numbers
+            if (currentCount < 0) {
+                currentCount = 0;
+            }
+
+            // Update the text on screen
+            countElement.innerText = currentCount;
+
+            // Visual feedback: brief pop animation
+            countElement.style.transform = 'scale(1.2)';
+            setTimeout(() => {
+                countElement.style.transform = 'scale(1)';
+            }, 100);
+        }
+    </script>
+
+</body>
+</html>
